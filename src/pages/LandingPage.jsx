@@ -840,7 +840,7 @@ const LandingPage = () => {
               onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
               <Globe style={{ width: '32px', height: '32px', color: '#10b981', marginBottom: '8px' }} />
-              <h3 style={{ fontSize: '32px', fontWeight: '700', color: '#0f172a' }}>24/7*</h3>
+              <h3 style={{ fontSize: '32px', fontWeight: '700', color: '#0f172a' }}>24/7**</h3>
               <p style={{ fontSize: '14px', fontWeight: '500', color: '#64748b' }}>{t.cloudAccess}</p>
             </div>
           </div>
