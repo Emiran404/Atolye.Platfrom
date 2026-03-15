@@ -12,6 +12,9 @@
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Passkey](https://img.shields.io/badge/Passkey-Secure-yellow?style=for-the-badge&logo=fingerprint)
 ![I18n](https://img.shields.io/badge/i18n-4_Languages-red?style=for-the-badge&logo=google-translate)
+![Repo Size](https://img.shields.io/github/repo-size/Emiran404/Atoyle.Platfrom)
+![Stars](https://img.shields.io/github/stars/Emiran404/Atoyle.Platfrom)
+![Last Commit](https://img.shields.io/github/last-commit/Emiran404/Atoyle.Platfrom)
 
 **Eğitim kurumları için modern, hızlı ve güvenli sınav yönetim ve dosya gönderim platformu.**
 
