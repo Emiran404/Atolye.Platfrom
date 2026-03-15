@@ -22,6 +22,9 @@
 
 </div>
 
+<p align="center">
+  <b>Atölye.Platform, PolyOS tarafından geliştirilen bir üründür.</b>
+</p>
 ---
 
 ## ✨ Özellikler
@@ -142,7 +145,7 @@ Bu proje **MIT** lisansı altında lisanslanmıştır. Detaylar için [LICENSE](
 <div align="center">
 
 **Geliştiren: Emirhan Gök**  
-Dünya çapında eğitimciler için sevgiyle kodlandı. ❤️
+Coded with love for educators worldwide. ❤️
 
 [⭐ Bu projeyi beğendiyseniz yıldız vermeyi unutmayın!](https://github.com/Emiran404/Atoyle.Platfrom)
 
