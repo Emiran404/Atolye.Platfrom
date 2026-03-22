@@ -94,22 +94,22 @@
 
 ---
 
-## 🚀 Kurulum
+## 🚀 Kurulum *git'de kurulması önerilir
 
 1.  **Projeyi Klonlayın:**
     ```bash
     git clone https://github.com/Emiran404/Atolye.Platfrom.git
-    cd sinav-gonderme-platformu
+    cd Atolye.Platform
     ```
 
-2.  **Bağımlılıkları Yükleyin:**
+2.  **Bağımlılıkları Yükleyin:** (Gerekli Kontrolleri Yapacaktır.) 
     ```bash
-    npm install
-    ```
+    ./kurulum.sh
+     ```
 
 3.  **Başlatın:**
     ```bash
-    npm run dev
+    ./baslat.sh
     ```
 
 ---
