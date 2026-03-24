@@ -104,11 +104,13 @@
 
 2.  **Bağımlılıkları Yükleyin:** (Gerekli Kontrolleri Yapacaktır.) 
     ```bash
+    chmod +x kurulum.sh
     ./kurulum.sh
      ```
 
 3.  **Başlatın:**
     ```bash
+    chmod +x baslat.sh
     ./baslat.sh
     ```
 
