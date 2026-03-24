@@ -98,7 +98,7 @@
 
 1.  **Projeyi Klonlayın:**
     ```bash
-    git clone https://github.com/Emiran404/Atolye.Platfrom.git
+    git clone https://github.com/Emiran404/Atolye.Platform.git
     cd Atolye.Platform
     ```
 
