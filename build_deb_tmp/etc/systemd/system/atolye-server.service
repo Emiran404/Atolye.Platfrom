@@ -1,0 +1,16 @@
+[Unit]
+Description=Atolye Platform Server
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/atolye-server
+ExecStart=/usr/bin/node /opt/atolye-server/server/index.js
+Restart=always
+RestartSec=10
+Environment=NODE_ENV=production
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

@@ -3,18 +3,7 @@
 <div align="center">
 
 ![PolyOS Banner](https://img.shields.io/badge/PolyOS-Exam_Platform-6366f1?style=for-the-badge&logo=react)
-![Version](https://img.shields.io/badge/version-2.3.0-blue?style=for-the-badge)
-...
-## 📑 Sürüm Geçmişi
-
-### v2.3.0 (7 Nisan 2026) - Akademik Filtreleme & Görsel Yenilikler
-*   **Gelişmiş Filtreleme:** Arşiv ve Değerlendirme sayfalarına sınıf ve kategori bazlı filtreleme sistemi eklendi.
-*   **Modern UI:** Glassmorphism (buzlu cam) efektleri ve yapışkan (sticky) filtre panelleri ile arayüz güncellendi.
-*   **Hata Düzeltmeleri:** Arama motoru çökmeleri ve ikon çakışmaları (padding/appearance) giderildi.
-*   **Veri Yönetimi:** Veri yükleme süreçleri optimize edildi ve öğretmen bazlı sınav listeleme hatası düzeltildi.
-
-### v2.2.1
-*   Sistem genelinde performans iyileştirmeleri ve küçük hata düzeltmeleri.
+![Version](https://img.shields.io/badge/version-2.4.0-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
@@ -39,6 +28,31 @@
 
 
 ![GitHub Repo Banner](https://banner-api-and-website-production-6dcd.up.railway.app/banner?header=%21%5Bnodedotjs%5D+At%C3%B6lye.Platform&subheader=%21%5Bvite%5DA%C3%A7%C4%B1k+kaynakl%C4%B1+bir+s%C4%B1nav+g%C3%B6nderme+ve+e%C4%9Fitim+y%C3%B6netim+platformu&bg=00000000&color=FFFFFF&subheadercolor=FFFFFF&headerfont=Roboto&subheaderfont=Open+Sans&support=false)
+
+## 📥 İndir (v2.4.0 Hazır Paketler)
+
+Sistemi derlemekle uğraşmadan aşağıdaki hazır paketleri indirerek hemen kullanmaya başlayabilirsiniz:
+
+| Paket Türü | İşletim Sistemi | Dosya / İndir |
+| :--- | :--- | :--- |
+| **Öğretmen Sunucusu** | Pardus / Linux | [atolye-platform-server.deb](#) |
+| **Masaüstü İstemci** | Windows | [Atolye-Platform-Setup.exe](#) |
+| **Masaüstü İstemci** | Pardus / Linux | [atolye-platform-client.deb](#) |
+
+---
+
+## 📑 Sürüm Geçmişi
+
+### v2.4.0 (7 Nisan 2026) - Çift Paket Mimari & Otomatik Keşif
+*   **Akıllı İstemci:** Windows (.exe) ve Pardus (.deb) için hazır Electron istemcisi eklendi.
+*   **Otomatik Keşif (mDNS):** İstemciler ağdaki sunucuyu artık otomatik buluyor.
+*   **Sunucu Paketleme:** Linux servis destekli `.deb` paketi hazırlandı.
+
+### v2.3.0 (7 Nisan 2026) - Akademik Filtreleme & Görsel Yenilikler
+*   **Gelişmiş Filtreleme:** Arşiv ve Değerlendirme sayfalarına sınıf ve kategori bazlı filtreleme eklendi.
+*   **Modern UI:** Glassmorphism ve yapışkan filtre panelleri ile arayüz güncellendi.
+
+---
 
 ## ✨ Özellikler
 

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                        "tech-blue": "#0ea5e9"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dark .glass-effect {
+            background: rgba(34, 22, 16, 0.6);
+            border: 1px solid rgba(236, 91, 19, 0.1);
+        }
+
+        .mesh-gradient {
+            background-color: #f8f6f6;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(236, 91, 19, 0.1) 0px, transparent 50%);
+        }
+    </style>
+</head>
+
+<body
+    class="font-display bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-6 mesh-gradient">
+    <div class="relative w-full max-w-[850px] group">
+        <!-- Background decorative elements -->
+        <div class="absolute -top-12 -left-12 w-64 h-64 bg-tech-blue/20 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-12 -right-12 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+        <div
+            class="glass-effect relative overflow-hidden rounded-xl shadow-2xl flex flex-col md:flex-row items-stretch">
+            <!-- Tech Illustration / Side Image -->
+            <div class="w-full md:w-2/5 min-h-[240px] relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-tech-blue/40 to-primary/40 mix-blend-overlay z-10">
+                </div>
+                <div class="w-full h-full bg-center bg-no-repeat bg-cover"
+                    data-alt="Modern tech abstract futuristic digital grid background"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDosfRAte5fh_RAPLjI6GTwqyI_1ZyrHn3z2Q-xFxrm63AC5eNk4ZkAJcs_DUcJNZslQoX_x4T9X3pGwoLHdtq_537gWaR8rwLkVSKAlR9OeCSz6A5bHRau2gEXz1cpxo4wKJzNfPiNy_4YDmxLLYxytF--OJ9n9iA1DNveVozBMUFfM2L5y7LLxFkKD89eJKbPYcufATtyZy-KSjxsNNxUNGEokIcglwUA7XJe9zoQtELYZojBtTNWm-ZE217Pi7ek4VNCAZgo12nL");'>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-full border border-white/20">
+                        <span class="material-symbols-outlined text-white text-5xl">terminal</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Content Section -->
+            <div class="flex-1 p-8 md:p-10 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span
+                            class="px-2 py-1 bg-tech-blue/10 text-tech-blue text-[10px] font-bold uppercase tracking-wider rounded">v2.1.2
+                            Stable</span>
+                        <span
+                            class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider rounded">Yeni
+                            Kurulum</span>
+                    </div>
+                    <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4 tracking-tight">
+                        PolyOS Exam
+                    </h1>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+                        PolyOS Exam Yazılımımızı yüklediğiniz ve kullandığınız için teşekkür ederiz. Görünüşe göre yeni
+                        kurulum yaptınız. Öğretmen hesabını şimdi bu sayfadan oluşturun.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-6">
+                    <div class="flex flex-wrap items-center gap-4">
+                        <button
+                            class="flex-1 md:flex-none min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-[#ff7e42] text-white text-sm font-bold shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all active:scale-95">
+                            <span class="truncate">Hesabı Oluştur</span>
+                        </button>
+                        <a class="flex items-center gap-2 px-4 h-12 rounded-lg bg-slate-200/50 dark:bg-slate-800/50 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                            href="https://github.com/Emiran404/Atoyle.Platfrom" target="_blank">
+                            <span
+                                class="material-symbols-outlined text-slate-700 dark:text-slate-300 text-xl">hub</span>
+                            <span
+                                class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest">Github</span>
+                        </a>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-6">
+                        <div class="flex items-center gap-2 text-slate-400">
+                            <span class="material-symbols-outlined text-sm">verified</span>
+                            <p class="text-[11px] font-medium uppercase tracking-widest">Tech-focused Infrastructure</p>
+                        </div>
+                        <p class="text-slate-500 dark:text-slate-500 text-xs font-medium">
+                            Developed by <span class="text-primary">Emirhan Gök</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

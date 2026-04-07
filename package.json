@@ -1,6 +1,6 @@
 {
   "name": "sinav-gonderme-platformu",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Modern exam and assignment management platform for Alanya Mesleki ve Teknik Anadolu Lisesi",
   "author": "Emirhan Gök <https://github.com/Emiran404>",
   "license": "MIT",
@@ -27,7 +27,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "preview:full": "concurrently \"npm run preview\" \"npm run dev:backend\"",
-    "install:all": "npm install && cd server && npm install"
+    "install:all": "npm install && cd server && npm install",
+    "package:server": "node scripts/package-deb.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
@@ -61,7 +62,9 @@
     "javascript-obfuscator": "^5.3.0",
     "rollup-plugin-javascript-obfuscator": "^1.0.4",
     "terser": "^5.46.0",
-    "vite": "npm:rolldown-vite@7.2.5"
+    "vite": "npm:rolldown-vite@7.2.5",
+    "tar": "^6.2.1",
+    "fs-extra": "^11.2.0"
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.2.5"

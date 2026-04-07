@@ -1,0 +1,16 @@
+export { default as TeacherDashboard } from './TeacherDashboard';
+export { default as CreateExam } from './CreateExam';
+export { default as ActiveExams } from './ActiveExams';
+export { default as ExamEdit } from './ExamEdit';
+export { default as EditRequests } from './EditRequests';
+export { default as Evaluate } from './Evaluate';
+export { default as StudentList } from './StudentList';
+export { default as Archive } from './Archive';
+export { default as Stats } from './Stats';
+export { default as TeacherNotifications } from './TeacherNotifications';
+export { default as TeacherSettings } from './TeacherSettings';
+export { default as PlatformManagement } from './PlatformManagement';
+export { default as IntegratedSystems } from './IntegratedSystems';
+export { default as PolyOsOGA } from './PolyOsOGA';
+export { default as LiveExams } from './LiveExams';
+export { default as Grades } from './Grades';

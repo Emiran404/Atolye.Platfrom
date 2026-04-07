@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+echo "Atolye Platform Server yapılandırılıyor..."
+
+# Servis dosyasını etkinleştir
+systemctl daemon-reload
+systemctl enable atolye-server.service
+systemctl restart atolye-server.service
+
+echo "✅ Atolye Platform Server başarıyla yüklendi ve başlatıldı."
+echo "🌐 Ağda 'atolye-server.local' olarak bulunabilir."

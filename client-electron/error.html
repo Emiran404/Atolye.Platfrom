@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bağlantı Hatası</title>
+  <style>
+    body { background: #fef2f2; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.1); border: 2px solid #fee2e2; width: 400px; text-align: center; }
+    h1 { color: #991b1b; font-size: 20px; }
+    p { color: #7f1d1d; font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
+    .btn { background: #ef4444; color: white; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
+    .tips { text-align: left; background: #fff5f5; padding: 15px; border-radius: 12px; margin-top: 20px; font-size: 13px; color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Sunucu Bulunamadı!</h1>
+    <p>Atolye Platform sunucusu yerel ağda tespit edilemedi.</p>
+    <div class="tips">
+      <strong>Çözüm Önerileri:</strong>
+      <ul>
+        <li>Sunucunun (Öğretmen bilgisayarı) açık olduğundan emin olun.</li>
+        <li>Sunucu ve bu bilgisayarın aynı ağda (Wi-Fi/Ethernet) olduğundan emin olun.</li>
+        <li>Güvenlik duvarının (Firewall) bağlantıyı engellemediğini kontrol edin.</li>
+      </ul>
+    </div>
+    <br>
+    <button onclick="window.location.reload()" class="btn">Tekrar Dene</button>
+  </div>
+</body>
+</html>

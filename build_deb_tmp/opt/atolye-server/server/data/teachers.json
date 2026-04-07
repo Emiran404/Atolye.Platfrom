@@ -1,0 +1,24 @@
+[
+  {
+    "id": "ml69mpw9dly7a8r3m5g",
+    "username": "volkan22",
+    "email": null,
+    "fullName": "Volkan Yıldırım",
+    "department": "Ağ Sistemleri",
+    "password": "cfeb837c12b040048914bea239a4f6d68999e131522078a6de07e18c110e7162",
+    "createdAt": "2026-02-03T07:16:52.761Z",
+    "lastLogin": "2026-04-07T07:44:23.015Z",
+    "recoveryKeyHash": "c0c278cb09f6c0f4fcdb9a6cd23a85f5272ebe4b36ffa1f4815421b5eb8c6e8c",
+    "recoveryKeyCreatedAt": "2026-02-17T07:36:28.095Z"
+  },
+  {
+    "id": "mn3gd50e2qz8f6or6vf",
+    "username": "ahmet",
+    "email": null,
+    "fullName": "ahmet",
+    "department": "siber",
+    "password": "3ab1803bee7766491a2241767df2979479eba9b8a3bd1d07308699442952021f",
+    "createdAt": "2026-03-23T17:21:29.246Z",
+    "lastLogin": "2026-03-23T17:49:56.739Z"
+  }
+]

@@ -1,0 +1,351 @@
+[
+  {
+    "id": "ml69p7uds3shr9ln52",
+    "studentNumber": "1749",
+    "fullName": "Burak Eray Durman",
+    "className": "11-B",
+    "password": "685953ccfdd7616718939251a481642fe3c479248a7b46e883b8fcc064bc49c7",
+    "folderPath": "11-B ogrenciler/Burak Eray Durman-1749",
+    "createdAt": "2026-02-03T07:18:49.333Z",
+    "lastLogin": null,
+    "ipHistory": []
+  },
+  {
+    "id": "ml69qjyrmik68326fuh",
+    "studentNumber": "0495",
+    "fullName": "Efe Karatepe",
+    "className": "11-B",
+    "password": "9d6d09f71af3a0599c8d69531c7bb6129d53e13be849e05125b892245a391acf",
+    "folderPath": "11-B ogrenciler/Efe Karatepe-0495",
+    "createdAt": "2026-02-03T07:19:51.699Z",
+    "lastLogin": null,
+    "ipHistory": []
+  },
+  {
+    "id": "ml69s3wo0s9v07a9lnu",
+    "studentNumber": "0471",
+    "fullName": "Ferhat Benek",
+    "className": "11-B",
+    "password": "0919ed3421777df82934a2a9c47aadf732b686bb235152e6536f8be55b850c26",
+    "folderPath": "11-B ogrenciler/ferhat benek-0471",
+    "createdAt": "2026-02-03T07:21:04.200Z",
+    "lastLogin": null,
+    "ipHistory": []
+  },
+  {
+    "id": "ml69s8dgmhdhj4uw0uj",
+    "studentNumber": "1016",
+    "fullName": "Ahmet Akif Durmaz",
+    "className": "11-B",
+    "password": "3941fccc406233c55d6c6a9a30cf5adaaff6a45d3afb62beab90857dc8709b47",
+    "folderPath": "11-B ogrenciler/Ahmet Akif Durmaz-1016",
+    "createdAt": "2026-02-03T07:21:09.988Z",
+    "lastLogin": "2026-03-10T18:30:53.868Z",
+    "ipHistory": [
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-10T18:30:43.639Z",
+        "action": "password_reset"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-10T18:30:47.030Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-10T18:30:53.868Z"
+      }
+    ],
+    "passwordChangeModeExpiresAt": null
+  },
+  {
+    "id": "ml69tc7uokui8x4ygpg",
+    "studentNumber": "1757",
+    "fullName": "Atakan Seven",
+    "className": "11-B",
+    "password": "ee59a5b7f87b7eaa81e556194101652b70d05133f2e22bfec8f8dca9baa9b58b",
+    "folderPath": "11-B ogrenciler/Atakan Seven-1757",
+    "createdAt": "2026-02-03T07:22:01.626Z",
+    "lastLogin": null,
+    "ipHistory": []
+  },
+  {
+    "id": "ml69v6n5y8zi1jmo1vq",
+    "studentNumber": "1750",
+    "fullName": "Raul Mirzajanov",
+    "className": "11-B",
+    "password": "304ad2eead9f556544315ddf8fddd5bf58c2236c8c16b08dffd834c18ea3e4eb",
+    "folderPath": "11-B ogrenciler/Raul Mirzajanov-1750",
+    "createdAt": "2026-02-03T07:23:27.713Z",
+    "lastLogin": null,
+    "ipHistory": []
+  },
+  {
+    "id": "ml69w63uiho2lm4qvm",
+    "studentNumber": "0030",
+    "fullName": "Ali Mukhtarli",
+    "className": "11-B",
+    "password": "0ea43e57550e4df73cadedaab06fb9134c6664d74d10a40239bd852f796d16a8",
+    "folderPath": "11-B ogrenciler/Ali Mukhtarli-0030",
+    "createdAt": "2026-02-03T07:24:13.674Z",
+    "lastLogin": null,
+    "ipHistory": [],
+    "suspended": false
+  },
+  {
+    "id": "ml6a2mcijtu6q2rbdk",
+    "studentNumber": "1618",
+    "fullName": "Emirhan Gök",
+    "className": "11-B",
+    "password": "9c287de7b2d1649469e9334d763b3f376e47f71e6b0c6d0892ce9f2b50a4ff65",
+    "folderPath": "11-B ogrenciler/Emirhan Gök-1618",
+    "createdAt": "2026-02-03T07:29:14.658Z",
+    "lastLogin": "2026-04-07T06:08:14.317Z",
+    "ipHistory": [
+      {
+        "ip": "::1",
+        "date": "2026-02-03T07:30:25.102Z"
+      },
+      {
+        "ip": "::1",
+        "date": "2026-02-03T07:32:39.416Z"
+      },
+      {
+        "ip": "::1",
+        "date": "2026-02-03T07:34:05.519Z"
+      },
+      {
+        "ip": "::1",
+        "date": "2026-02-03T09:59:59.839Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-25T21:23:55.260Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T03:23:53.806Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T03:30:20.438Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T03:41:48.211Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T03:53:14.795Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T04:23:14.405Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T04:27:16.067Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T04:34:09.689Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T04:47:00.572Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T04:59:31.913Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T08:15:15.135Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T08:19:07.757Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-02-26T08:23:23.689Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-03T01:54:29.421Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-03T01:58:22.817Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-03T01:59:36.237Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-03T05:23:54.993Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-03T05:38:56.612Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-03T06:46:36.732Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-03T07:23:05.948Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-03T10:34:48.393Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-03T10:36:47.756Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-08T14:29:49.625Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-08T14:30:05.076Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-08T14:43:49.130Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-08T14:44:06.316Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-08T14:51:33.803Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-08T14:58:10.599Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-10T18:06:06.279Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-10T20:32:02.595Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-10T20:34:42.791Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-03-11T15:16:33.360Z"
+      },
+      {
+        "ip": "127.0.0.1",
+        "date": "2026-04-07T06:08:14.317Z"
+      }
+    ]
+  },
+  {
+    "id": "ml6by9we4z14ey5ctax",
+    "studentNumber": "1763",
+    "fullName": "Mamed Abdulaev",
+    "className": "11-B",
+    "password": "07716f707fcbec593f3d7217ca893a148f3030a64d22a58ab9917f557d6038c3",
+    "folderPath": "11-B ogrenciler/Mamed Abdulaev-1763",
+    "createdAt": "2026-02-03T08:21:51.134Z",
+    "lastLogin": null,
+    "ipHistory": []
+  },
+  {
+    "id": "ml96u1o8tpapwynf3u",
+    "studentNumber": "1666",
+    "fullName": "Tuğra Erdoğan",
+    "className": "11-A",
+    "password": "e661e8400dc8443fc711f4c976f11887ab8e820e45559d5b63d90548a20bc5ff",
+    "folderPath": "11-A ogrenciler/Tuğra Erdoğan-1666",
+    "createdAt": "2026-02-05T08:21:54.297Z",
+    "lastLogin": "2026-02-05T09:06:07.764Z",
+    "ipHistory": [
+      {
+        "ip": "::1",
+        "date": "2026-02-05T09:06:07.764Z"
+      }
+    ]
+  },
+  {
+    "id": "ml96u7y84jqb5mp1ngj",
+    "studentNumber": "0421",
+    "fullName": "Şafak Ege Koçak",
+    "className": "11-A",
+    "password": "47947ad8cce9ac53b74e346081fb02a8a3faf2032e4adbe00f511ea3d4fa5df8",
+    "folderPath": "11-A ogrenciler/Şafak Ege Koçak-0421",
+    "createdAt": "2026-02-05T08:22:02.432Z",
+    "lastLogin": null,
+    "ipHistory": []
+  },
+  {
+    "id": "ml96upymvambg4w3jaa",
+    "studentNumber": "0298",
+    "fullName": "Yağız Çakaloğlu",
+    "className": "11-A",
+    "password": "1c921fda44f9ebac813cf7d174ae22ec2c040d58374d618712ba5683e9053a20",
+    "folderPath": "11-A ogrenciler/Yağız Çakaloğlu-0298",
+    "createdAt": "2026-02-05T08:22:25.774Z",
+    "lastLogin": "2026-02-05T09:04:48.249Z",
+    "ipHistory": [
+      {
+        "ip": "::1",
+        "date": "2026-02-05T08:38:27.018Z"
+      },
+      {
+        "ip": "::1",
+        "date": "2026-02-05T09:04:48.249Z"
+      }
+    ]
+  },
+  {
+    "id": "ml96v56vt78jgmq85o",
+    "studentNumber": "0205",
+    "fullName": "Ahmet İbrahim Efe Sarısoy",
+    "className": "11-A",
+    "password": "fa8e813560dbeb1fbcbfafe63077ecc06869f4929d791a849b7c474a40c48fe4",
+    "folderPath": "11-A ogrenciler/Ahmet İbrahim Efe Sarısoy-0205",
+    "createdAt": "2026-02-05T08:22:45.511Z",
+    "lastLogin": null,
+    "ipHistory": []
+  },
+  {
+    "id": "ml96vph17qe7rodtty5",
+    "studentNumber": "0091",
+    "fullName": "Ali Kılınç",
+    "className": "11-A",
+    "password": "ce65652e068da81f26aaec60f072e9208a121d5d7a8f76947cbf735e88c31a46",
+    "folderPath": "11-A ogrenciler/Ali Kılınç-0091",
+    "createdAt": "2026-02-05T08:23:11.797Z",
+    "lastLogin": "2026-02-05T09:05:00.202Z",
+    "ipHistory": [
+      {
+        "ip": "::1",
+        "date": "2026-02-05T09:05:00.202Z"
+      }
+    ]
+  },
+  {
+    "id": "mno7wphi6ufzjtle71g",
+    "studentNumber": "0016",
+    "fullName": "Ahmet",
+    "className": "11-B",
+    "password": "c7071c971948a5d553c355d1b36f19fa83de6830cf01c151c01516aea8d97d52",
+    "folderPath": "11-B ogrenciler/Ahmet-0016",
+    "createdAt": "2026-04-07T06:07:55.398Z",
+    "lastLogin": null,
+    "ipHistory": []
+  }
+]

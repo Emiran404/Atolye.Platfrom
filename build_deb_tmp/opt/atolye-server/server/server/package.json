@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "check-disk-space": "^3.4.0",
+    "multer": "^2.0.2"
+  }
+}

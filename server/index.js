@@ -37,6 +37,7 @@ import backupRoutes from './routes/backup.js';
 import liveSessionsRoutes from './routes/liveSessions.js';
 import systemRoutes from './routes/system.js';
 import { startNotificationWorker } from './workers/notificationWorker.js';
+import { startDiscovery } from './utils/discovery.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -82,6 +83,13 @@ app.use('/uploads', (req, res, next) => {
 app.use('/uploads', express.static(uploadsPath));
 
 console.log('📁 Uploads dizini:', uploadsPath);
+
+// Frontend Dist klasörü için static serve (Üretim modu için)
+const distPath = join(__dirname, '../dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  console.log('🌐 Frontend dist dizini yükleniyor:', distPath);
+}
 
 // Data klasörü oluştur
 const dataPath = join(__dirname, 'data');
@@ -235,6 +243,19 @@ app.post('/api/reset-all-data', (req, res) => {
   }
 });
 
+// Bilinmeyen tüm rotaları frontend'e (index.html) yönlendir (SPA desteği)
+const distPath2 = join(__dirname, '../dist');
+if (fs.existsSync(distPath2)) {
+  app.get('*', (req, res) => {
+    // Eğer istek bir API isteği değilse index.html gönder
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(join(distPath2, 'index.html'));
+    } else {
+      res.status(404).json({ error: 'API endpoint not found' });
+    }
+  });
+}
+
 // Error handler
 app.use((err, req, res, next) => {
   console.error('Server Error:', err);
@@ -257,4 +278,7 @@ server.listen(PORT, '0.0.0.0', () => {
       }
     }
   }
+  
+  // mDNS Keşif servisini başlat
+  startDiscovery(PORT);
 });

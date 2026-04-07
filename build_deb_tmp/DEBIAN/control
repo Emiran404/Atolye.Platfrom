@@ -1,0 +1,10 @@
+Package: atolye-platform-server
+Version: 2.3.0
+Section: utils
+Priority: optional
+Architecture: all
+Maintainer: Emirhan Gök <https://github.com/Emiran404>
+Depends: nodejs (>= 18.0.0), npm
+Description: Modern exam and assignment management platform server.
+ This package installs the Atolye Platform backend as a system service
+ with automatic mDNS discovery for clients.
