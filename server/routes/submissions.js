@@ -540,6 +540,7 @@ router.post('/check-duplicate', (req, res) => {
           studentName: m.studentName,
           studentClass: m.studentClass,
           fileName: m.fileName,
+          fileHash: m.fileHash,
           submittedAt: m.submittedAt
         }))
       });
@@ -572,6 +573,7 @@ router.get('/exam/:examId/duplicates', (req, res) => {
           studentName: sub.studentName,
           studentClass: sub.studentClass,
           fileName: sub.fileName,
+          fileHash: sub.fileHash,
           submittedAt: sub.submittedAt
         });
       }

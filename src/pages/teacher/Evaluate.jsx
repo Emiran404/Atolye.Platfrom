@@ -309,6 +309,7 @@ const Evaluate = () => {
   
   // Kopya tespit sistemi
   const [duplicates, setDuplicates] = useState([]);
+  const [allDuplicates, setAllDuplicates] = useState([]);
   const [loadingDuplicates, setLoadingDuplicates] = useState(false);
 
   // Load data on mount
@@ -316,6 +317,17 @@ const Evaluate = () => {
     const fetchData = async () => {
       await loadExams();
       await loadSubmissions();
+      
+      if (examId) {
+        try {
+          const dupResponse = await submissionApi.getExamDuplicates(examId);
+          if (dupResponse.success) {
+            setAllDuplicates(dupResponse.duplicates || []);
+          }
+        } catch (err) {
+          console.error('Kopya verileri yüklenemedi:', err);
+        }
+      }
     };
     fetchData();
     
@@ -325,7 +337,7 @@ const Evaluate = () => {
     }, 10000);
     
     return () => clearInterval(refreshInterval);
-  }, []);
+  }, [examId]);
 
   // Initialize
   useEffect(() => {
@@ -379,15 +391,22 @@ const Evaluate = () => {
             s.id === submissionId || s.files.some(f => f.id === submissionId)
           );
           if (sub) {
-            setCurrentSubmission(sub);
-            setCurrentIndex(groupedSubs.findIndex(s => s.id === sub.id || s.files.some(f => f.id === submissionId)));
-            setGrade(sub.grade?.toString() || '');
-            setFeedback(sub.feedback || '');
+            // Sadece öğrenci değiştiğinde veya sayfa ilk yüklendiğinde not alanlarını güncelle
+            if (!currentSubmission || currentSubmission.studentId !== sub.studentId) {
+              setCurrentSubmission(sub);
+              setCurrentIndex(groupedSubs.findIndex(s => s.id === sub.id || s.files.some(f => f.id === submissionId)));
+              setGrade(sub.grade?.toString() || '');
+              setFeedback(sub.feedback || '');
+              checkForDuplicates(sub); // İlk yüklemede kopya kontrolünü tetikle
+            }
           }
         } else if (groupedSubs.length > 0) {
-          setCurrentSubmission(groupedSubs[0]);
-          setGrade(groupedSubs[0].grade?.toString() || '');
-          setFeedback(groupedSubs[0].feedback || '');
+          if (!currentSubmission) {
+            setCurrentSubmission(groupedSubs[0]);
+            setGrade(groupedSubs[0].grade?.toString() || '');
+            setFeedback(groupedSubs[0].feedback || '');
+            checkForDuplicates(groupedSubs[0]); // İlk yüklemede kopya kontrolünü tetikle
+          }
         }
       }
     }
@@ -429,37 +448,45 @@ const Evaluate = () => {
   
   // Kopya kontrol fonksiyonu
   const checkForDuplicates = async (submission) => {
-    if (!submission?.fileHash) {
-      console.log('Hash yok, kopya kontrolü atlanıyor');
+    // Tüm dosya hash'lerini topla
+    const hashes = submission.files?.map(f => f.fileHash).filter(h => !!h) || [];
+    
+    if (hashes.length === 0) {
       setDuplicates([]);
       return;
     }
     
-    console.log('Kopya kontrolü başlatıldı:', {
-      fileHash: submission.fileHash,
-      examId: submission.examId,
-      studentId: submission.studentId
-    });
-    
     setLoadingDuplicates(true);
     try {
-      const response = await submissionApi.checkDuplicate(
-        submission.fileHash,
-        submission.examId,
-        submission.studentId
-      );
+      const allMatches = [];
       
-      console.log('Kopya kontrol sonuç (full response):', response);
-      console.log('hasDuplicate:', response.hasDuplicate);
-      console.log('matches:', response.matches);
-      
-      if (response.hasDuplicate && response.matches) {
-        console.log('Kopya bulundu:', response.matches);
-        setDuplicates(response.matches);
-      } else {
-        console.log('Kopya bulunamadı');
-        setDuplicates([]);
+      // Her bir dosya için kopya kontrolü yap
+      for (const hash of hashes) {
+        const response = await submissionApi.checkDuplicate(
+          hash,
+          submission.examId,
+          submission.studentId
+        );
+        
+        if (response.success && response.hasDuplicate && response.matches) {
+          // Eşleşmeleri topla
+          allMatches.push(...response.matches);
+        }
       }
+      
+      // Tekilleştir (aynı öğrenci farklı dosyalarla eşleşmiş olabilir)
+      const uniqueMatches = [];
+      const seenIds = new Set();
+      
+      allMatches.forEach(match => {
+        const key = `${match.studentNumber}-${match.fileName}`;
+        if (!seenIds.has(key)) {
+          seenIds.add(key);
+          uniqueMatches.push(match);
+        }
+      });
+      
+      setDuplicates(uniqueMatches);
     } catch (error) {
       console.error('Kopya kontrol hatası:', error);
       setDuplicates([]);
@@ -918,14 +945,37 @@ const Evaluate = () => {
                       </p>
                       <p style={styles.studentNumber}>{submission.studentNumber}</p>
                     </div>
-                    {submission.status === 'graded' ? (
-                      <div style={{ textAlign: 'center' }}>
-                        <p style={styles.gradeDisplay}>{submission.grade}</p>
-                        <Check style={{ width: '16px', height: '16px', color: '#10b981', margin: '0 auto' }} />
-                      </div>
-                    ) : (
-                      <span style={styles.badge('warning')}>Bekliyor</span>
-                    )}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      {/* Kopya Göstergesi */}
+                      {allDuplicates.some(dup => 
+                        dup.students.some(s => s.studentNumber === submission.studentNumber)
+                      ) && (
+                        <div 
+                          title="Potansiyel Kopya"
+                          style={{
+                            width: '24px',
+                            height: '24px',
+                            backgroundColor: '#fee2e2',
+                            borderRadius: '50%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#ef4444'
+                          }}
+                        >
+                          <Copy size={14} />
+                        </div>
+                      )}
+                      
+                      {submission.status === 'graded' ? (
+                        <div style={{ textAlign: 'center' }}>
+                          <p style={styles.gradeDisplay}>{submission.grade}</p>
+                          <Check style={{ width: '16px', height: '16px', color: '#10b981', margin: '0 auto' }} />
+                        </div>
+                      ) : (
+                        <span style={styles.badge('warning')}>Bekliyor</span>
+                      )}
+                    </div>
                   </div>
                 </div>
               )})
@@ -992,10 +1042,10 @@ const Evaluate = () => {
                         </div>
                         <div>
                           <h4 style={{ fontSize: '16px', fontWeight: '700', color: '#991b1b', margin: 0 }}>
-                            ⚠️ Kopya Tespit Edildi!
+                            ⚠️ Potansiyel Kopya!
                           </h4>
                           <p style={{ fontSize: '13px', color: '#b91c1c', margin: '4px 0 0 0' }}>
-                            Bu dosya {duplicates.length} farklı öğrencide bulundu
+                            Dosya içerikleri {duplicates.length} farklı öğrenciyle eşleşiyor
                           </p>
                         </div>
                       </div>
@@ -1019,10 +1069,13 @@ const Evaluate = () => {
                           }}>
                             <div>
                               <p style={{ fontWeight: '600', color: '#991b1b', margin: 0, fontSize: '14px' }}>
-                                {dup.studentName}
+                                {dup.studentName} ({dup.fileName})
                               </p>
                               <p style={{ fontSize: '12px', color: '#b91c1c', margin: '2px 0 0 0' }}>
                                 {dup.studentNumber} • {formatDate(dup.submittedAt)}
+                              </p>
+                              <p style={{ fontSize: '10px', color: '#ef4444', fontFamily: 'monospace', marginTop: '4px', opacity: 0.8 }}>
+                                Hash: {dup.fileHash}
                               </p>
                             </div>
                             <div style={{
@@ -1054,8 +1107,18 @@ const Evaluate = () => {
                     
                     <div style={styles.fileList}>
                       {currentSubmission.files && currentSubmission.files.length > 0 ? (
-                        currentSubmission.files.map((file, index) => (
-                          <div key={file.id || index} style={{...styles.fileItem, marginBottom: index < currentSubmission.files.length - 1 ? '12px' : 0}}>
+                        currentSubmission.files.map((file, index) => {
+                          const isDuplicate = duplicates.some(d => d.fileHash === file.fileHash);
+                          return (
+                          <div 
+                            key={file.id || index} 
+                            style={{
+                              ...styles.fileItem, 
+                              marginBottom: index < currentSubmission.files.length - 1 ? '12px' : 0,
+                              border: isDuplicate ? '2px solid #ef4444' : styles.fileItem.border,
+                              backgroundColor: isDuplicate ? '#fff5f5' : styles.fileItem.backgroundColor
+                            }}
+                          >
                             <div style={styles.fileInfo}>
                               <div style={styles.fileIcon}>
                                 <FileText style={{ width: '20px', height: '20px', color: '#3b82f6' }} />
@@ -1072,14 +1135,14 @@ const Evaluate = () => {
                                     gap: '6px',
                                     marginTop: '6px',
                                     padding: '6px 10px',
-                                    backgroundColor: '#f1f5f9',
+                                    backgroundColor: isDuplicate ? '#fee2e2' : '#f1f5f9',
                                     borderRadius: '6px',
-                                    border: '1px solid #e2e8f0'
+                                    border: isDuplicate ? '1px solid #fca5a5' : '1px solid #e2e8f0'
                                   }}>
-                                    <Copy style={{ width: '12px', height: '12px', color: '#64748b', flexShrink: 0 }} />
+                                    <Copy style={{ width: '12px', height: '12px', color: isDuplicate ? '#991b1b' : '#64748b', flexShrink: 0 }} />
                                     <span style={{
                                       fontSize: '11px',
-                                      color: '#64748b',
+                                      color: isDuplicate ? '#991b1b' : '#64748b',
                                       fontFamily: 'monospace',
                                       wordBreak: 'break-all',
                                       lineHeight: '1.4'
@@ -1101,9 +1164,14 @@ const Evaluate = () => {
                               </button>
                             </div>
                           </div>
-                        ))
+                          );
+                        })
                       ) : currentSubmission.fileName ? (
-                        <div style={styles.fileItem}>
+                        <div style={{
+                          ...styles.fileItem,
+                          border: duplicates.some(d => d.fileHash === currentSubmission.fileHash) ? '2px solid #ef4444' : styles.fileItem.border,
+                          backgroundColor: duplicates.some(d => d.fileHash === currentSubmission.fileHash) ? '#fff5f5' : styles.fileItem.backgroundColor
+                        }}>
                           <div style={styles.fileInfo}>
                             <div style={styles.fileIcon}>
                               <FileText style={{ width: '20px', height: '20px', color: '#3b82f6' }} />
@@ -1120,9 +1188,9 @@ const Evaluate = () => {
                                   gap: '6px',
                                   marginTop: '6px',
                                   padding: '6px 10px',
-                                  backgroundColor: '#f1f5f9',
+                                  backgroundColor: duplicates.some(d => d.fileHash === currentSubmission.fileHash) ? '#fee2e2' : '#f1f5f9',
                                   borderRadius: '6px',
-                                  border: '1px solid #e2e8f0'
+                                  border: duplicates.some(d => d.fileHash === currentSubmission.fileHash) ? '1px solid #fca5a5' : '1px solid #e2e8f0'
                                 }}>
                                   <Copy style={{ width: '12px', height: '12px', color: '#64748b', flexShrink: 0 }} />
                                   <span style={{
