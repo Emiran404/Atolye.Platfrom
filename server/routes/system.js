@@ -56,6 +56,30 @@ router.get('/version', (req, res) => {
   }
 });
 
+// Sürüm Karşılaştırma Yardımcısı (SemVer benzeri basit mantık)
+const isNewerVersion = (latest, current) => {
+  try {
+    if (!latest || !current) return false;
+    const clean = (v) => v.replace(/^v/, '').trim();
+    const l = clean(latest).split(/[-.]/);
+    const c = clean(current).split(/[-.]/);
+    
+    for (let i = 0; i < 3; i++) {
+      const ln = parseInt(l[i]) || 0;
+      const cn = parseInt(c[i]) || 0;
+      if (ln > cn) return true;
+      if (ln < cn) return false;
+    }
+    
+    // Suffix kontrolü (örn: beta) - Bu sistemde genellikle aynı versiyonun betası daha eski kabul edilebilir
+    // Ancak basit tutmak için sadece ana versiyon numaralarına bakıyoruz. 
+    // Daha detaylı bir kontrol gerekirse burası genişletilebilir.
+    return false; 
+  } catch (e) {
+    return latest !== current;
+  }
+};
+
 // Güncelleme Geçmişi
 router.get('/updates', (req, res) => {
   const updates = getData('updates');
@@ -84,7 +108,7 @@ router.post('/check-update', async (req, res) => {
       
       // Önbellekteki veriyi kullan ama updateAvailable durumunu güncel yerel sürüme göre tekrar hesapla
       const cachedResult = { ...updateCache.data };
-      cachedResult.updateAvailable = cachedResult.latestVersion !== currentVersion;
+      cachedResult.updateAvailable = isNewerVersion(cachedResult.latestVersion, currentVersion);
       
       return res.json(cachedResult);
     }
@@ -169,7 +193,7 @@ router.post('/check-update', async (req, res) => {
       releaseUrl = latestRelease.html_url;
     }
 
-    const isUpdateAvailable = latestVersion !== currentVersion;
+    const isUpdateAvailable = isNewerVersion(latestVersion, currentVersion);
 
     // Özel açıklama ayıklama (descx:xxx)
     let body = changelog;
@@ -284,8 +308,11 @@ router.post('/install-update', async (req, res) => {
     
     if (pkg.version !== version) {
        pkg.version = version;
-       fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+        fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
     }
+    
+    // 5. Önbelleği temizle (Yeni bir check-update tetiklenene kadar)
+    updateCache = { lastCheck: 0, data: null, error: null };
 
     res.json({ 
       success: true, 

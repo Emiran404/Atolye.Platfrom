@@ -1,12 +1,12 @@
 {
   "name": "sinav-gonderme-platformu",
-  "version": "2.2.0-beta",
+  "version": "2.2.1",
   "description": "Modern exam and assignment management platform for Alanya Mesleki ve Teknik Anadolu Lisesi",
   "author": "Emirhan Gök <https://github.com/Emiran404>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Emiran404/Atoyle.Platfrom.git"
+    "url": "https://github.com/Emiran404/Atolye.Platfrom.git"
   },
   "keywords": [
     "exam-platform",
