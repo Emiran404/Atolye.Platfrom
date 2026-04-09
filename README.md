@@ -3,7 +3,7 @@
 <div align="center">
 
 ![PolyOS Banner](https://img.shields.io/badge/PolyOS-Exam_Platform-6366f1?style=for-the-badge&logo=react)
-![Version](https://img.shields.io/badge/version-2.4.8-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-2.4.9-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
@@ -29,7 +29,7 @@
 
 ![GitHub Repo Banner](https://banner-api-and-website-production-6dcd.up.railway.app/banner?header=%21%5Bnodedotjs%5D+At%C3%B6lye.Platform&subheader=%21%5Bvite%5DA%C3%A7%C4%B1k+kaynakl%C4%B1+bir+s%C4%B1nav+g%C3%B6nderme+ve+e%C4%9Fitim+y%C3%B6netim+platformu&bg=00000000&color=FFFFFF&subheadercolor=FFFFFF&headerfont=Roboto&subheaderfont=Open+Sans&support=false)
 
-## 📥 İndir (v2.4.8 Hazır Paketler)
+## 📥 İndir (v2.4.9 Hazır Paketler)
 
 Sistemi derlemekle uğraşmadan aşağıdaki hazır paketleri GitHub üzerinden indirerek hemen kullanmaya başlayabilirsiniz:
 
@@ -41,6 +41,11 @@ Sistemi derlemekle uğraşmadan aşağıdaki hazır paketleri GitHub üzerinden 
 ---
 
 ## 📑 Sürüm Geçmişi
+
+### v2.4.9 (9 Nisan 2026) - Live Updates & Data Resilience
+*   **Update Engine:** "Güncellemeleri Kontrol Et" butonu artık sunucu tarafındaki cache'i zorla (force) geçerek GitHub'dan anlık veri çekiyor.
+*   **Storage Fix:** `storage.js` artık dosya başındaki gizli karakterleri (BOM) otomatik temizleyerek "Unexpected token" hatalarını kalıcı olarak çözdü.
+*   **Version Sync:** Sunucu ve sayfa aramotorları artık restart gerekmeden en güncel sürüm bilgisini yansıtıyor.
 
 ### v2.4.8 (9 Nisan 2026) - UX & Data Integrity Fix
 *   **Teacher Panel:** Yan menüye (sidebar) "Ana Sayfaya Dön" butonu eklendi.

@@ -150,8 +150,18 @@ HAZIR MISINIZ? Bu işlem tüm sistemi Fabrika Ayarlarına döndürecektir. 👋`
     setCheckingUpdate(true);
     setAvailableUpdate(null);
     try {
-      const response = await fetch('/api/system/check-update', { method: 'POST' });
+      const response = await fetch('/api/system/check-update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ force: true })
+      });
       const data = await response.json();
+      
+      // Sürüm bilgisini de tazeleyelim
+      const vRes = await fetch('/api/system/version');
+      const vData = await vRes.json();
+      if (vData.success) setCurrentVersion(vData.version);
+
       if (data.success && data.updateAvailable) {
         setAvailableUpdate(data);
         toast.info(`Yeni bir güncelleme bulundu: v${data.latestVersion}`);

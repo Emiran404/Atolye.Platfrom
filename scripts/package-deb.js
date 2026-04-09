@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.join(__dirname, '..');
 
-const VERSION = "2.3.0";
+const VERSION = "2.4.9";
 const PKG_NAME = "atolye-platform-server";
 const STAGE_DIR = path.join(root, 'build_deb_stage');
 

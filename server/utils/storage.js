@@ -11,8 +11,12 @@ export const getData = (key) => {
   const filePath = join(dataPath, `${key}.json`);
   try {
     if (fs.existsSync(filePath)) {
-      const data = fs.readFileSync(filePath, 'utf8');
-      return JSON.parse(data);
+      let data = fs.readFileSync(filePath, 'utf8');
+      // Remove Byte Order Mark (BOM) if it exists
+      if (data.charCodeAt(0) === 0xFEFF) {
+        data = data.slice(1);
+      }
+      return JSON.parse(data.trim());
     }
     return null;
   } catch (error) {
