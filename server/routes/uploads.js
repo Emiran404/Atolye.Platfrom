@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join, extname } from 'path';
 import fs from 'fs';
 import { hashFile } from '../utils/crypto.js';
+import { authenticateToken, authorizeRole } from '../middleware/auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -1,5 +1,6 @@
 import express from 'express';
 import { getData, setData, generateId } from '../utils/storage.js';
+import { authenticateToken, authorizeRole } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -95,7 +96,7 @@ router.post('/warning', (req, res) => {
 });
 
 // Teacher gets active sessions
-router.get('/exam/:examId', (req, res) => {
+router.get('/exam/:examId', authorizeRole('teacher'), (req, res) => {
   const { examId } = req.params;
   const sessions = activeSessions[examId] || {};
   
@@ -119,7 +120,7 @@ router.post('/finish', (req, res) => {
 });
 
 // Cancel student exam (teacher action)
-router.post('/cancel', (req, res) => {
+router.post('/cancel', authorizeRole('teacher'), (req, res) => {
   const { examId, studentId } = req.body;
   const studentInfo = activeSessions[examId]?.[studentId] || {};
   

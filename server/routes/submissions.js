@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { getData, setData, generateId } from '../utils/storage.js';
+import { authenticateToken, authorizeRole } from '../middleware/auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -359,7 +360,7 @@ router.patch('/:id/ready', (req, res) => {
 });
 
 // Not ver
-router.patch('/:id/grade', (req, res) => {
+router.patch('/:id/grade', authorizeRole('teacher'), (req, res) => {
   try {
     const { id } = req.params;
     const { grade, feedback, gradedBy } = req.body;
@@ -415,7 +416,7 @@ router.post('/:id/edit-request', (req, res) => {
 });
 
 // Düzenleme talebini yanıtla
-router.patch('/:id/edit-request/:requestId', (req, res) => {
+router.patch('/:id/edit-request/:requestId', authorizeRole('teacher'), (req, res) => {
   try {
     const { id, requestId } = req.params;
     const { approved, response, respondedBy, editDuration } = req.body;
@@ -452,7 +453,7 @@ router.patch('/:id/edit-request/:requestId', (req, res) => {
 });
 
 // Öğretmen direkt düzenleme izni ver (mevcut dosyaları sil)
-router.post('/:submissionId/grant-edit-permission', (req, res) => {
+router.post('/:submissionId/grant-edit-permission', authorizeRole('teacher'), (req, res) => {
   try {
     const { submissionId } = req.params;
     const { examId, studentId, note, teacherId } = req.body;
@@ -595,7 +596,7 @@ router.get('/exam/:examId/duplicates', (req, res) => {
 });
 
 // Teslimi sil
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authorizeRole('teacher'), (req, res) => {
   try {
     const { id } = req.params;
     const submissions = getData('submissions') || [];

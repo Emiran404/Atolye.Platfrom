@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
 import util from 'util';
 import { getActiveSessionCount, getActiveStudentIds, clearUserSessions } from './liveSessions.js';
+import { authenticateToken, authorizeRole } from '../middleware/auth.js';
 
 const execPromise = util.promisify(exec);
 

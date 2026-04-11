@@ -1,5 +1,6 @@
 import express from 'express';
 import { getData, setData, generateId } from '../utils/storage.js';
+import { authenticateToken, authorizeRole } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -26,7 +27,7 @@ router.get('/class/:className', (req, res) => {
 });
 
 // Yeni ders ekle
-router.post('/', (req, res) => {
+router.post('/', authorizeRole('teacher'), (req, res) => {
   try {
     const schedules = getData('schedules') || [];
     const newSchedule = {
@@ -45,7 +46,7 @@ router.post('/', (req, res) => {
 });
 
 // Toplu ders ekle
-router.post('/bulk', (req, res) => {
+router.post('/bulk', authorizeRole('teacher'), (req, res) => {
   try {
     const schedules = getData('schedules') || [];
     const { newSchedules } = req.body;
@@ -66,7 +67,7 @@ router.post('/bulk', (req, res) => {
 });
 
 // Ders güncelle
-router.put('/:id', (req, res) => {
+router.put('/:id', authorizeRole('teacher'), (req, res) => {
   try {
     const { id } = req.params;
     const schedules = getData('schedules') || [];
@@ -90,7 +91,7 @@ router.put('/:id', (req, res) => {
 });
 
 // Ders sil
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authorizeRole('teacher'), (req, res) => {
   try {
     const { id } = req.params;
     const schedules = getData('schedules') || [];

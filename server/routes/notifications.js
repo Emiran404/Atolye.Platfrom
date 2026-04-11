@@ -1,5 +1,6 @@
 import express from 'express';
 import { getData, setData } from '../utils/storage.js';
+import { authenticateToken, authorizeRole } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -40,7 +41,7 @@ router.get('/user/:userType/:userId', (req, res) => {
 });
 
 // Bildirim oluştur
-router.post('/', (req, res) => {
+router.post('/', authorizeRole('teacher'), (req, res) => {
   try {
     const { type, title, message, targetType, targetId, relatedId } = req.body;
     const notifications = getData('notifications') || [];
@@ -108,7 +109,7 @@ router.patch('/read-all/:userType/:userId', (req, res) => {
 });
 
 // Bildirim sil
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authorizeRole('teacher'), (req, res) => {
   try {
     const { id } = req.params;
     const notifications = getData('notifications') || [];
@@ -121,7 +122,7 @@ router.delete('/:id', (req, res) => {
   }
 });
 // Toplu bildirim gönder
-router.post('/bulk', (req, res) => {
+router.post('/bulk', authorizeRole('teacher'), (req, res) => {
   try {
     const { target, title, message } = req.body;
     const notifications = getData('notifications') || [];
