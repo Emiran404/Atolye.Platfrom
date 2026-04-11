@@ -56,7 +56,16 @@ import PolyOsLNA from './pages/PolyOsLNA';
 import ReportProblem from './pages/shared/ReportProblem';
 
 function App() {
-  const { theme, isAuthenticated, updateActivity, startInactivityTimer, isServerOnline, setServerOnline } = useAuthStore();
+  const { theme, isAuthenticated, updateActivity, startInactivityTimer, isServerOnline, setServerOnline, token, logout } = useAuthStore();
+
+  // JWT token'sız eski oturumları otomatik temizle
+  useEffect(() => {
+    if (isAuthenticated && !token) {
+      console.warn('⚠️ Eski oturum tespit edildi (token yok). Otomatik çıkış yapılıyor...');
+      logout();
+      window.location.href = '/';
+    }
+  }, [isAuthenticated, token]);
 
   // Initialize demo data
   useEffect(() => {
@@ -111,9 +120,13 @@ function App() {
 
     const sendHeartbeat = async () => {
       try {
+        const currentToken = useAuthStore.getState().token;
         const response = await fetch('/api/system/heartbeat', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            ...(currentToken ? { 'Authorization': `Bearer ${currentToken}` } : {})
+          },
           body: JSON.stringify({ 
             userId: user.id,
             userType: useAuthStore.getState().userType 
