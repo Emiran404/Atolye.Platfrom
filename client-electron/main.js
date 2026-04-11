@@ -82,11 +82,24 @@ function createMainWindow(url) {
     console.log(`🔌 Manuel bağlantı isteği: ${url}`);
     currentServerUrl = url;
     isDiscoveryFound = true;
-    if (mainWindow) {
-      mainWindow.loadURL(url);
-    } else {
+    
+    if (!mainWindow) {
       createMainWindow(url);
+    } else {
+      mainWindow.loadURL(url);
     }
+
+    // Ekranı anında zorla geçiş yap (Splash'te asılı kalmayı engelle)
+    setTimeout(() => {
+      if (mainWindow) {
+        mainWindow.show();
+        mainWindow.maximize();
+      }
+      if (splashWindow) {
+        splashWindow.close();
+        splashWindow = null;
+      }
+    }, 500); // 500ms geçiş animasyonu payı
   });
 }
 
