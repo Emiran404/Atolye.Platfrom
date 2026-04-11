@@ -1,83 +1,221 @@
 <!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atolye Platform Aranıyor</title>
-  <style>
-    body {
-      background: #f8fafc;
-      font-family: 'Inter', -apple-system, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100vw;
-      border-radius: 20px;
-    }
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Atolye Platform | Connecting</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#464555",
+                        "outline": "#777587",
+                        "surface-container": "#eaedff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#d0e1fb",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-tertiary-container": "#c7dcff",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#0f0069",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-container-highest": "#dae2fd",
+                        "on-background": "#131b2e",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "outline-variant": "#c7c4d8",
+                        "surface-variant": "#dae2fd",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "inverse-primary": "#c3c0ff",
+                        "primary-fixed": "#e2dfff",
+                        "surface-dim": "#d2d9f4",
+                        "primary-container": "#4f46e5",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface-tint": "#4d44e3",
+                        "background": "#faf8ff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "tertiary-container": "#0061ae",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface-bright": "#faf8ff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "inverse-surface": "#283044",
+                        "on-primary-container": "#dad7ff",
+                        "primary": "#3525cd",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface": "#faf8ff",
+                        "error": "#ba1a1a",
+                        "on-surface": "#131b2e",
+                        "tertiary": "#004986",
+                        "secondary": "#505f76",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "inverse-on-surface": "#eef0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .spinner-ring {
+            animation: spin 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #faf8ff 0%, #e2dfff 50%, #faf8ff 100%);
+            background-size: 400% 400%;
+        }
 
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 30px;
-      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
-      text-align: center;
-      border: 1px solid #e2e8f0;
-      width: 80%;
-      -webkit-app-region: drag;
-    }
-
-    .loader {
-      width: 48px;
-      height: 48px;
-      border: 5px solid #6366f1;
-      border-bottom-color: transparent;
-      border-radius: 50%;
-      display: inline-block;
-      box-sizing: border-box;
-      animation: rotation 1s linear infinite;
-      margin-bottom: 20px;
-    }
-
-    @keyframes rotation {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    h1 {
-      color: #0f172a;
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    p {
-      color: #64748b;
-      font-size: 14px;
-      margin: 0;
-    }
-
-    .status {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-  </style>
+        .glass-panel {
+            background: rgba(250, 248, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            -webkit-app-region: drag;
+        }
+    </style>
 </head>
-<body>
-  <div class="card">
-    <span class="loader"></span>
-    <h1>Atolye Platform</h1>
-    <p>Sunucu aranıyor, lütfen bekleyin...</p>
-    <div class="status">mDNS Ağı Taranıyor</div>
-  </div>
-</body>
-</html>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center overflow-hidden gradient-bg">
+<!-- Top Navigation Anchor (Shared Component Execution) -->
+<nav class="fixed top-0 w-full flex justify-center items-center py-8 w-full bg-transparent z-50">
+<div class="flex items-center gap-2">
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="relative z-10 w-full max-w-lg px-6">
+<!-- Connection Card -->
+<div class="glass-panel border border-white/20 rounded-xl p-12 flex flex-col items-center text-center shadow-2xl shadow-primary/5">
+<!-- Custom Sophisticated SVG Spinner -->
+<div class="relative w-32 h-32 mb-10">
+<!-- Inner Tonal Ring -->
+<div class="absolute inset-0 rounded-full border-[6px] border-surface-container-high opacity-50"></div>
+<!-- Primary Animated Spinner -->
+<svg class="absolute inset-0 w-full h-full spinner-ring" viewbox="0 0 100 100">
+<defs>
+<lineargradient id="spinner-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color: #3525cd; stop-opacity: 1"></stop>
+<stop offset="100%" style="stop-color: #4f46e5; stop-opacity: 0.1"></stop>
+</lineargradient>
+</defs>
+<path d="M 50 10 A 40 40 0 0 1 90 50" fill="none" stroke="url(#spinner-gradient)" stroke-linecap="round" stroke-width="6"></path>
+</svg>
+<!-- Core Icon -->
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="cell_tower">cell_tower</span>
+</div>
+</div>
+<!-- Typography Hierarchy -->
+<div class="space-y-4">
+<h1 class="font-manrope text-4xl font-extrabold tracking-tight text-on-background">
+                    Atolye Platform
+                </h1>
+<div class="space-y-2">
+<p class="text-lg font-medium text-on-surface-variant">
+                        Sunucu aranıyor, lütfen bekleyin...
+                    </p>
+<div class="flex items-center justify-center gap-2 py-2 px-4 bg-secondary-container/30 rounded-full self-center mx-auto w-max">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="text-xs font-semibold tracking-widest text-primary uppercase font-label">
+                            mDNS Ağı Taranıyor
+                        </span>
+</div>
+</div>
+<!-- Manual IP Input (New) -->
+<div id="manual-section" class="mt-8 w-full transition-all duration-300">
+    <button id="show-manual-btn" class="text-sm font-bold text-primary hover:text-primary/70 underline underline-offset-4 cursor-pointer">
+        Ağ bulunamadı mı? IP'yi Elle Gir
+    </button>
+    <div id="manual-input-area" class="hidden mt-4 space-y-3">
+        <input type="text" id="ip-input" placeholder="Örn: 192.168.1.9" 
+               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-center text-sm text-slate-800">
+        <button id="connect-btn" class="w-full bg-primary text-white py-3 rounded-xl font-bold text-sm hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-sm">sync_alt</span>
+            Bağlan
+        </button>
+    </div>
+</div>
+</div>
+<!-- Subtle Decorative Elements -->
+<div class="mt-6 grid grid-cols-3 gap-8 w-full opacity-40">
+<div class="h-1 bg-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/3 rounded-full"></div>
+</div>
+<div class="h-1 bg-outline-variant rounded-full"></div>
+<div class="h-1 bg-outline-variant rounded-full"></div>
+</div>
+</div>
+<!-- Secondary Meta Information -->
+<div class="mt-8 text-center">
+<p class="text-sm text-outline font-medium tracking-wide">
+                Yerel ağınızdaki aktif çalışma alanları keşfediliyor
+            </p>
+</div>
+</main>
+<!-- Visual Accents (Background Depth) -->
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-tertiary-container/5 rounded-full blur-[120px]"></div>
+<!-- Decorative Image Layer (Editorial Style) -->
+</div>
+<script>
+    const { ipcRenderer } = require('electron');
+    const showBtn = document.getElementById('show-manual-btn');
+    const inputArea = document.getElementById('manual-input-area');
+    const connectBtn = document.getElementById('connect-btn');
+    const ipInput = document.getElementById('ip-input');
+
+    if(showBtn) {
+        showBtn.addEventListener('click', () => {
+            inputArea.classList.toggle('hidden');
+            showBtn.classList.add('hidden');
+        });
+
+        connectBtn.addEventListener('click', () => {
+            const ip = ipInput.value.trim();
+            if (ip) {
+                connectBtn.innerHTML = 'Bağlanıyor...';
+                ipcRenderer.send('manual-connect', ip);
+            }
+        });
+
+        ipInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                connectBtn.click();
+            }
+        });
+    }
+</script>
+</body></html>

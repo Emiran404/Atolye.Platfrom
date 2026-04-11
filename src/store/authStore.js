@@ -40,6 +40,14 @@ const useAuthStore = create(
       lastActivity: Date.now(),
       inactivityTimer: null,
       language: getCurrentLanguage(),
+      isServerOnline: true,
+
+      // Sunucu durumunu güncelle
+      setServerOnline: (status) => {
+        if (get().isServerOnline !== status) {
+          set({ isServerOnline: status });
+        }
+      },
 
       // Aktivite kaydı güncelle
       updateActivity: () => {

@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.join(__dirname, '..');
 
-const VERSION = "2.4.9";
+const VERSION = "2.5.5";
 const PKG_NAME = "atolye-platform-server";
 const STAGE_DIR = path.join(root, 'build_deb_stage');
 
@@ -66,7 +66,13 @@ async function build() {
     await fs.copy(postinstSrc, path.join(debianPath, 'postinst'));
     await fs.copy(serviceSrc, path.join(etcPath, 'atolye-server.service'));
 
-    // 4. Tarball'ları oluştur
+    // 4. Control dosyasındaki versiyonu güncelle
+    const controlPath = path.join(debianPath, 'control');
+    let controlContent = await fs.readFile(controlPath, 'utf8');
+    controlContent = controlContent.replace(/Version: .*/, `Version: ${VERSION}`);
+    await fs.writeFile(controlPath, controlContent);
+
+    // 5. Tarball'ları oluştur
     console.log("🛠️  Tarball'lar hazırlanıyor...");
     const controlTar = path.join(root, 'control.tar.gz');
     const dataTar = path.join(root, 'data.tar.gz');
@@ -76,7 +82,9 @@ async function build() {
       gzip: true,
       cwd: debianPath,
       file: controlTar,
-      portable: true
+      portable: true,
+      noPax: true, // PAX başlıklarını devre dışı bırak (Linux uyumluluğu için kritik)
+      mtime: new Date(0) // Zaman damgasını sabitle
     }, ['.']);
 
     // data.tar.gz
@@ -85,13 +93,15 @@ async function build() {
       cwd: STAGE_DIR,
       file: dataTar,
       portable: true,
+      noPax: true, // PAX başlıklarını devre dışı bırak
+      mtime: new Date(0), // Zaman damgasını sabitle
       filter: (path) => !path.includes('DEBIAN') // DEBIAN klasörünü datadan çıkar
     }, ['./opt', './etc']);
 
     // debian-binary dosyası
     const debianBinary = Buffer.from("2.0\n");
 
-    // 5. Final .deb (ar) paketini birleştir
+    // 6. Final .deb (ar) paketini birleştir
     console.log("🎁 .deb arşivi birleştiriliyor...");
     const dest = path.join(root, `${PKG_NAME}_${VERSION}_all.deb`);
     

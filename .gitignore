@@ -18,6 +18,9 @@ build_deb_tmp/
 downloads/
 **/downloads/
 public/viewer/windows/build/
+screenshots/
+**/screenshots/
+.antigravity/
 
 # Binary & Media (Excluded)
 *.deb

@@ -5,6 +5,7 @@ import { ToastContainer } from './components/ui/Toast';
 import { useNotificationStore } from './store/notificationStore';
 import { useAuthStore } from './store/authStore';
 import { initializeDemoData } from './utils/initData';
+import ConnectionStatusOverlay from './components/ConnectionStatusOverlay';
 
 // Landing
 import { LandingPage } from './pages/LandingPage';
@@ -55,7 +56,7 @@ import PolyOsLNA from './pages/PolyOsLNA';
 import ReportProblem from './pages/shared/ReportProblem';
 
 function App() {
-  const { theme, isAuthenticated, updateActivity, startInactivityTimer } = useAuthStore();
+  const { theme, isAuthenticated, updateActivity, startInactivityTimer, isServerOnline, setServerOnline } = useAuthStore();
 
   // Initialize demo data
   useEffect(() => {
@@ -110,7 +111,7 @@ function App() {
 
     const sendHeartbeat = async () => {
       try {
-        await fetch('/api/system/heartbeat', {
+        const response = await fetch('/api/system/heartbeat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -118,8 +119,15 @@ function App() {
             userType: useAuthStore.getState().userType 
           })
         });
+        
+        if (response.ok) {
+          setServerOnline(true);
+        } else {
+          setServerOnline(false);
+        }
       } catch (error) {
         console.error('Heartbeat failed:', error);
+        setServerOnline(false);
       }
     };
 
@@ -145,9 +153,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      {/* Toast Container - useToastStore için */}
-      <ToastContainer />
+      <div className={`transition-all duration-500 ${!isServerOnline ? 'blur-md pointer-events-none' : ''}`}>
+        <ScrollToTop />
+        {/* Toast Container - useToastStore için */}
+        <ToastContainer />
 
       <Routes>
         {/* Landing */}
@@ -437,6 +446,9 @@ function App() {
         {/* Catch all - redirect to landing */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </div>
+      {/* Global Connection Status Overlay */}
+      <ConnectionStatusOverlay />
     </BrowserRouter>
   );
 }

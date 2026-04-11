@@ -3,7 +3,7 @@
 <div align="center">
 
 ![PolyOS Banner](https://img.shields.io/badge/PolyOS-Exam_Platform-6366f1?style=for-the-badge&logo=react)
-![Version](https://img.shields.io/badge/version-2.4.9-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-2.5.5-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
@@ -29,7 +29,7 @@
 
 ![GitHub Repo Banner](https://banner-api-and-website-production-6dcd.up.railway.app/banner?header=%21%5Bnodedotjs%5D+At%C3%B6lye.Platform&subheader=%21%5Bvite%5DA%C3%A7%C4%B1k+kaynakl%C4%B1+bir+s%C4%B1nav+g%C3%B6nderme+ve+e%C4%9Fitim+y%C3%B6netim+platformu&bg=00000000&color=FFFFFF&subheadercolor=FFFFFF&headerfont=Roboto&subheaderfont=Open+Sans&support=false)
 
-## 📥 İndir (v2.4.9 Hazır Paketler)
+## 📥 İndir (v2.5.5 Hazır Paketler)
 
 Sistemi derlemekle uğraşmadan aşağıdaki hazır paketleri GitHub üzerinden indirerek hemen kullanmaya başlayabilirsiniz:
 
@@ -41,6 +41,29 @@ Sistemi derlemekle uğraşmadan aşağıdaki hazır paketleri GitHub üzerinden 
 ---
 
 ## 📑 Sürüm Geçmişi
+
+### v2.5.5 (11 Nisan 2026) - Ultimate Network Stability Patch
+*   **Zero Collision mDNS:** Sunucu isimlerine benzersiz rastgele kimlikler atanarak "Service name is already in use" hatası ve çökme problemleri tamamen giderildi.
+*   **Splash Screen Manual Override:** Bağlantı bulunamadığında sonsuz "Ağ Taranıyor" döngüsüne giren açılış ekranına (Splash), direkt kurtarma sağlayan "Manuel IP" giriş özelliği eklendi.
+*   **Resilient IPC Flow:** Erken aşama bağlantı senaryoları için Electron ana süreci içerisindeki manuel bağlantı köprüsü onarıldı.
+
+### v2.5.3 (9 Nisan 2026) - Universal Discovery & External Broadcast
+*   **External IP Visibility:** mDNS yayını artık sadece local loopback üzerinde değil, tüm fiziksel ağ arayüzleri üzerinde aktif.
+*   **Hostname Binding:** Sunucu yayını `.local` hostname'i ile standart hale getirildi, Windows-Linux arası tanınma sorunu giderildi.
+
+### v2.5.2 (9 Nisan 2026) - Legacy Discovery & Multi-Address Support
+*   **Robust mDNS (v1.0.0 Style):** Sunucu keşfi artık sadece referer IP'sine değil, yayınlanan tüm adreslere bakıyor ve IPv4 öncelikli tarama yapıyor.
+*   **Multi-IP Logic:** VPN veya sanal ağlar olsa dahi gerçek sunucu IP'sini bulma ihtimali maksimize edildi.
+
+### v2.5.1 (9 Nisan 2026) - Network Resilience & Manual IP Update
+*   **Manual IP Connection:** mDNS (Bonjour) ağda bulunamadığında kullanıcıların IP adresi girerek manuel bağlanabilmesi için yeni bir UI ve altyapı eklendi.
+*   **Discovery Fix:** Ağ üzerindeki keşif süreci daha esnek hale getirildi. 
+*   **UI Polish:** "Hata" sayfasındaki teknik metinler sadeleştirildi.
+
+### v2.5.0 (9 Nisan 2026) - Cinematic UI & Resilience Update
+*   **Cinematic Splash Screen:** Uygulama açılışı tamamen yenilendi. Glassmorphism, gelişmiş SVG spinner ve cinematic animasyonlar eklendi.
+*   **Connection Resilience:** Sunucu bağlantısı koptuğunda ekranı buzlayan (blur) ve sağ altta modern "Bağlantı Koptu" uyarısı gösteren sistem devreye alındı.
+*   **Heartbeat Monitoring:** Global kalp atışı takip sistemiyle sunucu erişilebilirliği anlık izlenmeye başlandı.
 
 ### v2.4.9 (9 Nisan 2026) - Live Updates & Data Resilience
 *   **Update Engine:** "Güncellemeleri Kontrol Et" butonu artık sunucu tarafındaki cache'i zorla (force) geçerek GitHub'dan anlık veri çekiyor.

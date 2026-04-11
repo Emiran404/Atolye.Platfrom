@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.join(__dirname, '..');
 
-const VERSION = "1.0.0";
+const VERSION = "2.5.5";
 const PKG_NAME = "atolye-platform-client";
 const STAGE_DIR = path.join(root, 'build_client_deb_stage');
 
@@ -111,7 +111,9 @@ exit 0
       gzip: true,
       cwd: debianPath,
       file: controlTar,
-      portable: true
+      portable: true,
+      noPax: true,
+      mtime: new Date(0)
     }, ['.']);
 
     // data.tar.gz
@@ -120,6 +122,8 @@ exit 0
       cwd: STAGE_DIR,
       file: dataTar,
       portable: true,
+      noPax: true,
+      mtime: new Date(0),
       filter: (path) => !path.includes('DEBIAN')
     }, ['./opt', './usr']);
 

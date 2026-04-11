@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { Bonjour } from 'bonjour-service';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -8,12 +8,14 @@ const __dirname = path.dirname(__filename);
 
 let mainWindow;
 let splashWindow;
+let currentServerUrl = null;
+let isDiscoveryFound = false;
 const bonjour = new Bonjour();
 
 function createSplash() {
   splashWindow = new BrowserWindow({
-    width: 500,
-    height: 350,
+    width: 600,
+    height: 450, // Biraz daha geniş ve yüksek (Yeni tasarım için)
     transparent: true,
     frame: false,
     alwaysOnTop: true,
@@ -27,49 +29,118 @@ function createSplash() {
 }
 
 function createMainWindow(url) {
+  if (mainWindow) {
+    mainWindow.loadURL(url);
+    return;
+  }
+
   mainWindow = new BrowserWindow({
-    width: 1200,
+    width: 1280,
     height: 800,
-    show: false, // found olana kadar kapalı
+    show: false,
     title: "Atolye Platform",
     autoHideMenuBar: true,
     webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true
+      nodeIntegration: true, // Hata sayfasında IP girmek için geçici gerekli, React için kısıtlayacağız
+      contextIsolation: false
     }
   });
 
   mainWindow.loadURL(url);
+
+  // Sayfa yükleme hatası (Sunucu kapalıyken reload veya drop)
+  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
+    console.log(`⚠️ Yükleme Hatası (${errorCode}): ${errorDescription}`);
+    // -105, -102 gibi network hatalarında error.html göster
+    if (errorCode !== -3) { // -3 is user aborted (intentional)
+      mainWindow.loadFile('error.html');
+    }
+  });
 
   mainWindow.once('ready-to-show', () => {
     if (splashWindow) {
       splashWindow.close();
       splashWindow = null;
     }
-    mainWindow.show();
-    mainWindow.maximize();
+    
+    // Eğer error.html yüklenmemişse göster
+    if (!mainWindow.webContents.getURL().includes('error.html')) {
+      mainWindow.show();
+      mainWindow.maximize();
+    } else {
+      mainWindow.show(); // Hata sayfasını da göster
+    }
   });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  // MANUEL BAĞLANTI İÇİN IPC DİSTRİBÜTÖRÜ
+  ipcMain.on('manual-connect', (event, host) => {
+    const url = host.startsWith('http') ? host : `http://${host}:3001`;
+    console.log(`🔌 Manuel bağlantı isteği: ${url}`);
+    currentServerUrl = url;
+    isDiscoveryFound = true;
+    if (mainWindow) {
+      mainWindow.loadURL(url);
+    } else {
+      createMainWindow(url);
+    }
+  });
 }
 
-// mDNS Taraması Başlat
+// mDNS Taraması Başlat (Sürekli Çalışır)
 function startDiscovery() {
   console.log('🔍 Sunucu aranıyor...');
   const browser = bonjour.find({ type: 'atolye' });
 
   browser.on('up', (service) => {
-    const url = `http://${service.referer.address}:${service.port}`;
-    console.log(`✅ Sunucu Bulundu: ${url}`);
-    
-    if (!mainWindow) {
-      createMainWindow(url);
+    // Sunucunun yayınladığı tüm adresleri dene (Önemli: referrer yerine addresses daha garantidir)
+    const addresses = service.addresses || [service.referer.address];
+    console.log(`🔍 mDNS Servis Bulundu (${service.name}), adresler: ${addresses.join(', ')}`);
+
+    for (const ip of addresses) {
+      // IPv6 adreslerini şimdilik atla (Genelde sorun çıkarır)
+      if (ip.includes(':')) continue;
+      
+      const url = `http://${ip}:${service.port}`;
+      
+      if (!isDiscoveryFound || (mainWindow && mainWindow.webContents.getURL().includes('error.html'))) {
+          console.log(`✅ Sunucu Deneniyor: ${url}`);
+          currentServerUrl = url;
+          isDiscoveryFound = true;
+          createMainWindow(url);
+          // 1.0.0'da stop vardı ama resilience için açık bırakıyoruz, ancak createMainWindow içinde kontrol var
+          break;
+      }
     }
-    
-    browser.stop();
   });
+
+  // Hata durumunda Periyodik Kontrol (Fallback & Localhost check)
+  setInterval(async () => {
+    if (!isDiscoveryFound || (mainWindow && mainWindow.webContents.getURL().includes('error.html'))) {
+      const targets = ['http://localhost:3001', currentServerUrl].filter(Boolean);
+      
+      for (const target of targets) {
+        try {
+          const response = await fetch(`${target}/api/system/status`, { signal: AbortSignal.timeout(1000) });
+          if (response.ok) {
+            console.log(`🚀 Sunucu aktif: ${target}`);
+            isDiscoveryFound = true;
+            if (!mainWindow) {
+              createMainWindow(target);
+            } else {
+              mainWindow.loadURL(target);
+            }
+            break;
+          }
+        } catch (e) {
+          // ignore failures
+        }
+      }
+    }
+  }, 5000);
 }
 
 app.whenReady().then(() => {
@@ -77,7 +148,6 @@ app.whenReady().then(() => {
   startDiscovery();
 });
 
-// 15 saniye içinde bulamazsa hata göster (opsiyonel)
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
@@ -86,6 +156,10 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
-    createSplash();
+    if (isDiscoveryFound && currentServerUrl) {
+      createMainWindow(currentServerUrl);
+    } else {
+      createSplash();
+    }
   }
 });
