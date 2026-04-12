@@ -33,7 +33,7 @@ export default defineConfig(({ command }) => ({
   },
   server: {
     host: '0.0.0.0',
-    port: process.env.PORT ? parseInt(process.env.PORT) : 5173,
+    port: process.env.PORT ? parseInt(process.env.PORT) : 80,
     watch: {
       ignored: ['**/src/uploads_student/**']
     },
