@@ -120,23 +120,52 @@ const initializeDataFiles = () => {
     'submissions.json',
     'notifications.json',
     'schedules.json',
-    'classes.json'
+    'classes.json',
+    'settings.json',
+    'reports.json',
+    'updates.json'
   ];
 
   dataFiles.forEach(file => {
     const filePath = join(dataPath, file);
     if (!fs.existsSync(filePath)) {
+      let content = [];
+      
       if (file === 'classes.json') {
-        const defaultClasses = [
+        content = [
           "9-A", "9-B", "9-C", "9-D", "9-E", "9-F",
           "10-A", "10-B", "10-C", "10-D", "10-E", "10-F",
           "11-A", "11-B", "11-C", "11-D", "11-E", "11-F",
           "12-A", "12-B", "12-C", "12-D", "12-E", "12-F"
         ];
-        fs.writeFileSync(filePath, JSON.stringify(defaultClasses, null, 2), 'utf-8');
+      } else if (file === 'settings.json') {
+        content = {
+          registrationEnabled: true,
+          teacherRegistrationEnabled: true,
+          allowedClasses: [
+            "9-A", "9-B", "9-C", "9-D", "9-E", "9-F",
+            "10-A", "10-B", "10-C", "10-D", "10-E", "10-F",
+            "11-A", "11-B", "11-C", "11-D", "11-E", "11-F",
+            "12-A", "12-B", "12-C", "12-D", "12-E", "12-F"
+          ],
+          liderAhenk: {
+            enabled: false,
+            url: "ldap://localhost:389",
+            baseDN: "dc=example,dc=com",
+            bindDN: "cn=admin,dc=example,dc=com",
+            bindPassword: "",
+            userDNPattern: "uid={{username}},ou=users,dc=example,dc=com",
+            searchFilter: "(uid={{username}})",
+            syncInterval: 0
+          }
+        };
+      } else if (file === 'reports.json' || file === 'updates.json') {
+        content = [];
       } else {
-        fs.writeFileSync(filePath, JSON.stringify([], null, 2), 'utf-8');
+        content = [];
       }
+      
+      fs.writeFileSync(filePath, JSON.stringify(content, null, 2), 'utf-8');
       console.log(`📄 ${file} oluşturuldu`);
     }
   });
